@@ -3,5 +3,6 @@
 public enum ReminderStatus
 {
     Scheduled,
-    Sent
+    Sent,
+    Failed
 }

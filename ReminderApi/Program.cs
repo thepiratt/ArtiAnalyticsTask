@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IReminderRespository, ReminderRepository>();
 builder.Services.AddSingleton<IReminderService, ReminderService>();
 builder.Services.AddSingleton<IReminderResponseMapper, ReminderResponseMapper>();
+builder.Services.AddSingleton<IEmailService, BrevoEmailService>();
 builder.Services.AddHostedService<ReminderWorker>();
 
 builder.Services.AddControllers();

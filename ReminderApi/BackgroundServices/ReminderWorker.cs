@@ -3,7 +3,7 @@ using ReminderApi.Models;
 
 namespace ReminderApi.BackgroundServices;
 
-public class ReminderWorker(IReminderRespository repository, ILogger<ReminderWorker> logger) : BackgroundService
+public class ReminderWorker(IReminderRespository repository, IEmailService emailService, ILogger<ReminderWorker> logger) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -18,10 +18,20 @@ public class ReminderWorker(IReminderRespository repository, ILogger<ReminderWor
 
             foreach (var reminder in dueReminders)
             {
-                logger.LogInformation("[{Time}] Reminder sent: {Message}, to {email}.", now, reminder.Message, reminder.Email);
+                try
+                {
+                    await emailService.SendEmailAsync(reminder.Email, "Your Reminder", reminder.Message);
+                    logger.LogInformation("[{Time}] Reminder sent: {Message}, to {email}.", now, reminder.Message, reminder.Email);
 
-                reminder.Status = ReminderStatus.Sent;
-                repository.Update(reminder);
+                    reminder.Status = ReminderStatus.Sent;
+                    repository.Update(reminder);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "Failed to send reminder {ReminderId}", reminder.Id);
+                    reminder.Status = ReminderStatus.Failed;
+                    repository.Update(reminder);
+                }
             }
 
             await Task.Delay(5000, stoppingToken);
