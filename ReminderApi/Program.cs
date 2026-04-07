@@ -1,6 +1,13 @@
+using ReminderApi.BackgroundServices;
+using ReminderApi.Repositories;
+using ReminderApi.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<ReminderRepository>();
+builder.Services.AddHostedService<ReminderWorker>();
+builder.Services.AddSingleton<ReminderService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
