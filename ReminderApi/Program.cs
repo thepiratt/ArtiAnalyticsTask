@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddSingleton<IReminderRespository, ReminderRepository>();
 builder.Services.AddSingleton<IReminderService, ReminderService>();
+builder.Services.AddSingleton<IReminderResponseMapper, ReminderResponseMapper>();
 builder.Services.AddHostedService<ReminderWorker>();
 
 builder.Services.AddControllers();

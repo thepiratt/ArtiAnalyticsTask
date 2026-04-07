@@ -6,30 +6,21 @@ namespace ReminderApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class RemindersController(IReminderService service, ILogger<RemindersController> logger) : ControllerBase
+    public class RemindersController(IReminderService service, IReminderResponseMapper mapper, ILogger<RemindersController> logger) : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
         [HttpPost(Name = "CreateReminder")]
         public IActionResult Create(ReminderRequest request)
         {
             var reminder = service.Create(request.Message, request.SendAt, request.Email);
 
-            return Ok(new
-            {
-                id = reminder.Id,
-                status = reminder.Status,
-                sendAt = reminder.SendAt
-            });
+            return Ok(mapper.MapToResponse(reminder));
         }
 
         [HttpGet(Name = "GetAllReminders")]
         public IActionResult GetAll()
         {
-            return Ok(service.GetAll());
+            return Ok(mapper.MapToResponses(service.GetAll()));
         }
     }
 }
