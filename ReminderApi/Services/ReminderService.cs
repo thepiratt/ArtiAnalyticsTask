@@ -1,9 +1,9 @@
-﻿using ReminderApi.Models;
-using ReminderApi.Repositories;
+﻿using ReminderApi.Interfaces;
+using ReminderApi.Models;
 
 namespace ReminderApi.Services;
 
-public class ReminderService(ReminderRepository repository)
+public class ReminderService(IReminderRespository repository) : IReminderService
 {
     public Reminder Create(string message, DateTime sendAt, string? email)
     {

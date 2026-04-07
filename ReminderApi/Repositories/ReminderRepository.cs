@@ -1,9 +1,10 @@
-﻿using ReminderApi.Models;
+﻿using ReminderApi.Interfaces;
+using ReminderApi.Models;
 using System.Collections.Concurrent;
 
 namespace ReminderApi.Repositories;
 
-public class ReminderRepository
+public class ReminderRepository : IReminderRespository
 {
     private readonly ConcurrentDictionary<Guid, Reminder> _reminders = new();
 

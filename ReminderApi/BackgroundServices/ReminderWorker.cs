@@ -1,9 +1,9 @@
-﻿using ReminderApi.Models;
-using ReminderApi.Repositories;
+﻿using ReminderApi.Interfaces;
+using ReminderApi.Models;
 
 namespace ReminderApi.BackgroundServices;
 
-public class ReminderWorker(ReminderRepository repository, ILogger<ReminderWorker> logger) : BackgroundService
+public class ReminderWorker(IReminderRespository repository, ILogger<ReminderWorker> logger) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {

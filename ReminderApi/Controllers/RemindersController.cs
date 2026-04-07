@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using ReminderApi.Interfaces;
 using ReminderApi.Models.DTOs;
-using ReminderApi.Services;
 
 namespace ReminderApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class RemindersController(ReminderService service, ILogger<RemindersController> logger) : ControllerBase
+    public class RemindersController(IReminderService service, ILogger<RemindersController> logger) : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
