@@ -3,15 +3,11 @@ using ReminderApi.Models;
 
 namespace ReminderApi.Services;
 
-public class ReminderService(IReminderRespository repository) : IReminderService
+public class ReminderService(IReminderRespository repository, IReminderValidator validator) : IReminderService
 {
     public Reminder Create(string message, DateTime sendAt, string? email)
     {
-        if (string.IsNullOrWhiteSpace(message))
-            throw new ArgumentException("Message is required");
-
-        if (sendAt <= DateTime.UtcNow)
-            throw new ArgumentException("SendAt must be in the future");
+        validator.ValidateCreateRequest(message, sendAt);
 
         var reminder = new Reminder
         {
