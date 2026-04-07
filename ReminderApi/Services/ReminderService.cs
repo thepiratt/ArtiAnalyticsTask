@@ -3,12 +3,10 @@ using ReminderApi.Models;
 
 namespace ReminderApi.Services;
 
-public class ReminderService(IReminderRespository repository, IReminderValidator validator) : IReminderService
+public class ReminderService(IReminderRespository repository) : IReminderService
 {
     public Reminder Create(string message, DateTime sendAt, string? email)
     {
-        validator.ValidateCreateRequest(message, sendAt);
-
         var reminder = new Reminder
         {
             Id = Guid.NewGuid(),
