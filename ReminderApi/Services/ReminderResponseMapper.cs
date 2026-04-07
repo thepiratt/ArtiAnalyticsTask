@@ -14,7 +14,7 @@ public class ReminderResponseMapper : IReminderResponseMapper
             Message = reminder.Message,
             SendAt = reminder.SendAt,
             Email = reminder.Email,
-            Status = reminder.Status
+            Status = reminder.Status.ToString()
         };
     }
 

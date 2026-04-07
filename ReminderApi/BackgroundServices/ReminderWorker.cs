@@ -18,7 +18,7 @@ public class ReminderWorker(IReminderRespository repository, ILogger<ReminderWor
 
             foreach (var reminder in dueReminders)
             {
-                logger.LogInformation("[{Time}] Reminder sent: {Message}", now, reminder.Message);
+                logger.LogInformation("[{Time}] Reminder sent: {Message}, to {email}.", now, reminder.Message, reminder.Email);
 
                 reminder.Status = ReminderStatus.Sent;
                 repository.Update(reminder);

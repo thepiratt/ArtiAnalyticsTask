@@ -6,5 +6,5 @@ public class ReminderResponse
     public string Message { get; set; } = string.Empty;
     public DateTime SendAt { get; set; }
     public string? Email { get; set; }
-    public ReminderStatus Status { get; set; }
+    public string Status { get; set; } = string.Empty;
 }
