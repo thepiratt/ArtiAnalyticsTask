@@ -12,10 +12,19 @@ namespace ReminderApi.Controllers
         [HttpPost(Name = "CreateReminder")]
         public IActionResult Create([FromBody] ReminderRequest request)
         {
-            var reminder = service.Create(request.Message, request.SendAt, request.Email);
+            try
+            {
+                var reminder = service.Create(request.Message, request.SendAt, request.Email);
 
-            var response = mapper.MapToResponse(reminder);
-            return CreatedAtRoute("GetReminderById", new { id = reminder.Id }, response);
+                var response = mapper.MapToResponse(reminder);
+                return CreatedAtRoute("GetReminderById", new { id = reminder.Id }, response);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error creating reminder");
+                return StatusCode(500, "Internal server error");
+            }
+
         }
 
         [HttpGet(Name = "GetAllReminders")]
