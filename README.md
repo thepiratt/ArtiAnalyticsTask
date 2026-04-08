@@ -89,6 +89,7 @@ Response (example):
 
 ## Notes for Reviewers
 
+- This is not AI generated, you can check commit history on how the implementation went.
 - Implementation favors simplicity, clarity, and SOLID-friendly patterns to make future changes straightforward.
 - The Brevo integration is implemented but optional; omit the API key to use console logging fallback.
 - See `Program.cs`, `Controllers/RemindersController.cs`, `Services/ReminderService.cs`, `Repositories/ReminderRepository.cs`, and `BackgroundServices/ReminderWorker.cs` for core logic.
