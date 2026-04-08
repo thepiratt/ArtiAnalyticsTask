@@ -54,6 +54,13 @@ Request: `GET /reminders`
     { "id": "2", "message": "Backup database", "sendAt": "2025-10-09T14:00:00Z", "status": "Sent" }
   ]
 
+- **Get reminder by id**
+
+Request: `GET /reminders/{id}`
+
+Response (example):
+{ "id": "generated-guid", "message": "Check API gateway logs", "sendAt": "2025-10-10T14:30:00Z", "status": "Scheduled", "email": "test@example.com" }
+
 ## Design & Approach
 
 - **Storage**: In-memory repository (`Repositories/ReminderRepository.cs`) chosen to deliver a complete implementation within a short timeframe. No external dependencies required.
