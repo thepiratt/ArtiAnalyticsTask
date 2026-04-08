@@ -5,7 +5,7 @@ using ReminderApi.Models.DTOs;
 namespace ReminderApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("reminders")]
     public class RemindersController(IReminderService service, IReminderResponseMapper mapper, ILogger<RemindersController> logger) : ControllerBase
     {
 
