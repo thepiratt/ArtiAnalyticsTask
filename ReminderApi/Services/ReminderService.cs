@@ -5,7 +5,7 @@ namespace ReminderApi.Services;
 
 public class ReminderService(IReminderRespository repository) : IReminderService
 {
-    public Reminder Create(string message, DateTime sendAt, string email)
+    public Reminder Create(string message, DateTime sendAt, string? email)
     {
         var reminder = new Reminder
         {
