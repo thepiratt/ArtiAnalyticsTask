@@ -8,4 +8,5 @@ public interface IReminderRespository
     IEnumerable<Reminder> GetAll();
     IEnumerable<Reminder> GetPending();
     void Update(Reminder reminder);
+    Reminder? GetById(Guid id);
 }

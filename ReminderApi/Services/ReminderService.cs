@@ -21,4 +21,6 @@ public class ReminderService(IReminderRespository repository) : IReminderService
     }
 
     public IEnumerable<Reminder> GetAll() => repository.GetAll();
+
+    public Reminder? GetById(Guid id) => repository.GetById(id);
 }

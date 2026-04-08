@@ -10,17 +10,28 @@ namespace ReminderApi.Controllers
     {
 
         [HttpPost(Name = "CreateReminder")]
-        public IActionResult Create(ReminderRequest request)
+        public IActionResult Create([FromBody] ReminderRequest request)
         {
             var reminder = service.Create(request.Message, request.SendAt, request.Email);
 
-            return Ok(mapper.MapToResponse(reminder));
+            var response = mapper.MapToResponse(reminder);
+            return CreatedAtRoute("GetReminderById", new { id = reminder.Id }, response);
         }
 
         [HttpGet(Name = "GetAllReminders")]
         public IActionResult GetAll()
         {
             return Ok(mapper.MapToResponses(service.GetAll()));
+        }
+
+        [HttpGet("{id:guid}", Name = "GetReminderById")]
+        public IActionResult Get(Guid id)
+        {
+            var reminder = service.GetById(id);
+            if (reminder is null)
+                return NotFound();
+
+            return Ok(mapper.MapToResponse(reminder));
         }
     }
 }

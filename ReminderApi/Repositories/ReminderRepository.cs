@@ -19,4 +19,6 @@ public class ReminderRepository : IReminderRespository
 
     public void Update(Reminder reminder)
         => _reminders[reminder.Id] = reminder;
+    public Reminder? GetById(Guid id)
+        => _reminders.TryGetValue(id, out var reminder) ? reminder : null;
 }
